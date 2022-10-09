@@ -10,7 +10,7 @@ Use console.log() to write the proper output to the command line.
 **/
 
 const fizzbuzz = () => {
-  // Add your code here
+  // Add your code herE
 
   //Bad method but works
   // for (let i = 1; i <= 100; ++i)
