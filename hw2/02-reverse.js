@@ -17,7 +17,6 @@ submit_button.addEventListener("click", () => {   //If there is no form, the "su
       reversed = number.join("");
       out.textContent = `${number.join("")} --> ${reversed}`;
       out.style.color = "green";
-
     }
     else
     {
