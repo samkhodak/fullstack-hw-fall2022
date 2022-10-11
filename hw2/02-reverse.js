@@ -10,11 +10,10 @@ submit_button.addEventListener("click", () => {   //If there is no form, the "su
     out.style.margin = "1.5em 0 0.5em 0";
 
     //Reverse the number and output it
-    let number = number_input.value.split("");            
+    const number = number_input.value.split("");            
     if (number.length === 8)
     {
-      reversed = number.reverse();
-      reversed = number.join("");
+      let reversed = number.reverse().join("");
       out.textContent = `${number.join("")} --> ${reversed}`;
       out.style.color = "green";
     }
