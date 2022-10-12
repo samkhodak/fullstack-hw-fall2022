@@ -14,7 +14,7 @@ submit_button.addEventListener("click", () => {   //If there is no form, the "su
     if (number.length === 8)
     {
       let reversed = number.reverse().join("");
-      out.textContent = `${number.join("")} --> ${reversed}`;
+      out.textContent = `${number_input.value} --> ${reversed}`;
       out.style.color = "green";
     }
     else
