@@ -11,8 +11,6 @@ form.addEventListener("submit", (event) => {
     checkbox: form.elements["checkbox"].checked,
   };
 
-  if (!form_data.name) form_data.name = "No feedback was submitted.";
-  if (!form_data.email) form_data.email = "No feedback was submitted.";
   if (!form_data.feedback) form_data.feedback = "No feedback was submitted.";
   if (!form_data.checkbox) form_data.checkbox = "No, thank you."
   else
@@ -23,4 +21,5 @@ form.addEventListener("submit", (event) => {
   console.log(`Email: ${form_data.email}`);
   console.log(`Feedback: ${form_data.feedback}`);
   console.log(`Newsletter: ${form_data.checkbox}`);
+  console.groupEnd();
 });
