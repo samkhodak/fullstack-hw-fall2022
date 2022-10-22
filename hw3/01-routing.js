@@ -1,4 +1,4 @@
-const http = require('http');
+const http = require("http");
 const port = process.env.PORT || 5001;
 
 // http://localhost:5001/welcome should return a status code 200 with a welcome message of your choice in html format
@@ -15,17 +15,17 @@ const port = process.env.PORT || 5001;
 
 const server = http.createServer((req, res) => {
   const routes = [
-    'welcome',
-    'redirect',
-    'redirected',
-    'cache',
-    'cookie',
-    'check-cookies',
-    'other',
+    "welcome",
+    "redirect",
+    "redirected",
+    "cache",
+    "cookie",
+    "check-cookies",
+    "other",
   ];
 
   let getRoutes = () => {
-    let result = '';
+    let result = "";
 
     routes.forEach(
       (elem) => (result += `<li><a href="/${elem}">${elem}</a></li>`)
@@ -34,16 +34,70 @@ const server = http.createServer((req, res) => {
     return result;
   };
 
-  if (req.url === '/') {
-    let routeResults = getRoutes();
+  switch (req.url) {
+    case "/":
+      let routeResults = getRoutes();
 
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(`<h1>Exercise 01</h1>`);
-    res.write(`<ul> ${routeResults} </ul>`);
-    res.end();
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.write(`<h1>Exercise 01</h1>`);
+      res.write(`<ul> ${routeResults} </ul>`);
+      res.end();
+      break;
+
+    case "/welcome":
+      console.log(`${req.method}, ${req.url}`);
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.write("<h1>Welcome!<h1>");
+      res.end();
+      break;
+
+    case "/redirect":
+      console.log(`${req.method}, ${req.url}`);
+      res.writeHead(302, {
+        Location: "/redirected",
+      });
+      res.end();
+      break;
+
+    case "/cache":
+      console.log(`${req.method}, ${req.url}`);
+      res.writeHead(200, {
+        "Content-Type": "text/html",
+        "Cache-Control": "max-age=86400",
+      });
+      res.write("<p>This resources was cached</p>");
+      res.end();
+      break;
+
+    case "/cookie":
+      console.log(`${req.method}, ${req.url}`);
+      res.writeHead(200, {
+        "Content-Type": "text/html",
+        "Set-Cookie": "hello=world",
+      });
+      res.write("<p>cookies... yummm</p>");
+      res.end();
+      break;
+
+    case "/check-cookies":
+      console.log(`${req.method}, ${req.url}`);
+      res.writeHead(200, {
+        "Content-Type": "text/html",
+      });
+      if (req.headers.cookie.includes("hello=world")) res.write("<p>yes</p>");
+      else res.write("<p>no</p>");
+      res.end();
+      break;
+
+    default:
+      console.log(`${req.method}, ${req.url}`);
+      res.writeHead(404, {
+        "Content-Type": "text/html",
+      });
+      res.write("<h1>ERROR: 404 Page Not Found</h1>");
+      res.end();
+      break;
   }
-
-  // Add your code here
 });
 
 server.listen(port, () => {
