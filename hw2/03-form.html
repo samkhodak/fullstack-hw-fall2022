@@ -13,7 +13,51 @@
   </head>
   <body class="bg-dark">
     <form class="bg-light border rounded w-50 mx-auto mt-5 p-3">
-      <h1 class="mt-2 mb-4">Contact Form</h1>
+      <div class="form-group d-flex flex-column">
+        <h1 class="mt-2 mb-4">Contact Form</h1>
+        <label for="name" class="py-1">Name *</label>
+        <input
+          id="name"
+          class="p-1 px-2 mb-3"
+          type="text"
+          name="name"
+          placeholder="Enter your name"
+          required
+        />
+
+        <label for="email" class="py-1">Email *</label>
+        <input
+          id="email"
+          class="p-1 px-2 mb-3"
+          type="email"
+          name="email"
+          placeholder="user@email.com"
+          required
+        />
+
+        <label for="feedback" class="py-1">Submit your message:</label>
+        <textarea
+          id="feedback"
+          class="p-1 px-2 mb-3"
+          rows = 5
+          name = "feedback"
+          placeholder="Tell us what you'd like us to know!"
+        ></textarea>
+      </div>
+
+      <div class="checkbox-row">
+        <input id="checkbox" class="" type="checkbox" name="checkbox" />
+        <label for="checkbox" class="">Sign up for the newsletter</label>
+      </div>
+
+      <div class="buttons-row d-flex gap-2 my-4">
+        <button class="btn btn-primary flex-fill" type="submit" value="Submit">
+          Submit
+        </button>
+        <button class="btn btn-secondary flex-fill" type="reset" value="Reset">
+          Reset
+        </button>
+      </div>
     </form>
   </body>
 </html>
