@@ -82,8 +82,6 @@ app.get("*", (req, res) => {
   res.send("<h1>404 Error</h1>");
 });
 
-// Add your code here
-
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
