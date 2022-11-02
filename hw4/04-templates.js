@@ -11,6 +11,12 @@ app.set('view engine', 'pug');
 // REST Countries URL
 const url = 'https://restcountries.com/v3.1/all';
 
+async function country_data(url) {
+  let global_data = await fetch(url);
+  let countries_array = await global_data.json();
+  await console.log(countries_array);
+}
+
 // Add your code here
 
 app.get('/', (req, res) => {
@@ -27,6 +33,8 @@ app.get('/capitals', (req, res) => {
   // check for empty data in the output array
 
   let countries = ['Afghanistan', 'Aland Islands', 'Albania'];
+
+  country_data(url);
 
   res.render('page', {
     heading: 'Countries and Capitals',
