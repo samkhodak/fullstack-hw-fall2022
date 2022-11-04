@@ -34,7 +34,8 @@ app.get("*", (req, res) => {
     req.session.pages_viewed.push(req.url);
     html += `<p>Currently on route: ${req.url}</p>`;
     html += `<p>Previously visited:</p>`;
-    // for (page of req.session.pages_viewed)
+
+    //This goes backwards so the user always sees the last page visited at the top of the list, not including the current page.
     for (let i = req.session.pages_viewed.length - 2; i >= 0; --i)
       html += `<p>${req.session.pages_viewed[i]}</p>`;
     console.log(req.session.pages_viewed);
