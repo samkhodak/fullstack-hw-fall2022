@@ -16,8 +16,8 @@ app.post('/form', (req, res) => {
 app.post('/submit', (req, res) => {
   let body = req.body;
   let name = body.name || 'n/a';
-  let email = body.name || 'n/a';
-  let comments = body.comments || 'n/a';
+  let email = body.email || 'n/a';
+  let comments = body.feedback || 'n/a';
   let newsletter = body.newsletter || 'n/a';
 
   res.set({'Content-Type': 'text/html'});
