@@ -33,7 +33,6 @@ const server = http.createServer((req, res) => {
 
   //Returns a structure with key-value pairs of each url pair, eg. hello=>world
   let search_params = url.searchParams;
-
   let border_style = `style = 'border: 1px solid grey'`
 
   //Start with a <table> starting tag, then add to the html with each table row in search_params.

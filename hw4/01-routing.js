@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = process.env.PORT || 5001;
 
@@ -13,16 +13,16 @@ const port = process.env.PORT || 5001;
 // For other routes, such as http://localhost:5001/other, this exercise should return a status code 404 with '404 - page not found' in html format
 
 const routes = [
-  'welcome',
-  'redirect',
-  'redirected',
-  'cache',
-  'cookie',
-  'other',
+  "welcome",
+  "redirect",
+  "redirected",
+  "cache",
+  "cookie",
+  "other",
 ];
 
 let getRoutes = () => {
-  let result = '';
+  let result = "";
 
   routes.forEach(
     (elem) => (result += `<li><a href="/${elem}">${elem}</a></li>`)
@@ -31,18 +31,56 @@ let getRoutes = () => {
   return result;
 };
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   let routeResults = getRoutes();
 
-  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.writeHead(200, { "Content-Type": "text/html" });
   res.write(`<h1>Exercise 04</h1>`);
   res.write(`<ul> ${routeResults} </ul>`);
   res.end();
 });
 
-app.get('/welcome', (req, res) => {});
+app.get("/welcome", (req, res) => {
+  //Optional way like https, but we can also do it the express way below.
+  // res.writeHead(200, { "Content-Type": "text/html" });
+  // res.write("<h1>Hello and welcome!</h1>");
+  // res.end();
+  res.status(200);
+  res.set({ "Content-Type": "text/html" });
+  res.send("<h1>Hello and welcome!");
+});
 
-// Add your code here
+//Just using res.redirect does not actually give you a page. You must set /redirected as well.
+app.get("/redirect", (req, res) => {
+  res.redirect(302, "/redirected");
+});
+app.get("/redirected", (req, res) => {
+  res.status(302);
+  res.set({ "Content-Type": "text/html" });
+  res.send("<h1>This is the redirected page.</h1>");
+});
+
+//res.send() sends once and closes the stream, whereas with write() we can write multiple times before ending.
+app.get("/cache", (req, res) => {
+  res.set({
+    "Content-type": "text/plain",
+    "Cache-Control": "max-age=86400",
+  });
+  res.send("This resource was cached.");
+});
+
+app.get("/cookie", (req, res) => {
+  res.set({ "Content-Type": "text/plain" });
+  res.cookie("hello", "world");
+  res.send("cookies... yummm")
+});
+
+//* path covers all paths that aren't accounted for with the gets.
+app.get("*", (req, res) => {
+  res.set(404);
+  res.set({'Content-Type': 'text/html'});
+  res.send("<h1>404 Error</h1>");
+});
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

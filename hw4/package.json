@@ -2,6 +2,11 @@
   "dependencies": {
     "axios": "^0.21.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.3",
+    "node": "^19.0.0",
     "pug": "^3.0.2"
+  },
+  "scripts": {
+    "start": "nodemon 04-templates.js"
   }
 }
